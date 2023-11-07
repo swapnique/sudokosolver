@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku Solver</title>
+
+    <!-- Bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body class="p-5">
+    <!-- Toast Component -->
+    <div class="w-100 d-flex justify-content-center align-items-center pb-4">
+      <div
+        class="toast align-items-center justify-content-center"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        id="toast"
+        autohide="true"
+        animation="true"
+        delay="1000"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Thanks for Sharing 💖!</div>
+          <button
+            type="button"
+            class="btn-close me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-block m-auto">
+      <h2 class="text-center">
+        Welcome to <br class="d-block d-md-none" />
+        <span
+          >Sudoku Solver!
+          <span onclick="share()" style="display: inline">
+            <i class="fa-solid fa-square-share-nodes"></i> </span
+        ></span>
+      </h2>
+
+      <div class="d-block mt-5 adjust-square">
+        <div class="row row1">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-6"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku1-9"
+          />
+        </div>
+        <div class="row row2">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-2"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-3"
+            value="9"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-4"
+            value="4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-6"
+            value="7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-7"
+            value="2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku2-9"
+            value="3"
+          />
+        </div>
+        <div class="row row3">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-4"
+            value="1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku3-9"
+            value="8"
+          />
+        </div>
+        <div class="row row4">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-1"
+            value="6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-3"
+            value="1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-4"
+            value="5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-7"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-8"
+            value="3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku4-9"
+          />
+        </div>
+        <div class="row row5">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-1"
+            value="7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-4"
+            value="6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-6"
+            value="9"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-7"
+            value="4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-8"
+            value="2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku5-9"
+          />
+        </div>
+        <div class="row row6">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-2"
+            value="4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-3"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-4"
+            value="7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-7"
+            value="6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku6-9"
+            value="9"
+          />
+        </div>
+        <div class="row row7">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-1"
+            value="4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-2"
+            value="2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-4"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-5"
+            value="7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku7-9"
+            value="6"
+          />
+        </div>
+        <div class="row row8">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-1"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-2"
+            value="5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-4"
+            value="3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-7"
+            value="1"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-8"
+            value="7"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku8-9"
+          />
+        </div>
+        <div class="row row9">
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-1"
+            value="9"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-4"
+            value="2"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-5"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-6"
+            value="6"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-7"
+            value="3"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-8"
+            value="8"
+          />
+          <input
+            type="text"
+            min="1"
+            max="9"
+            class="col p-0 p-md-1"
+            id="sudoku9-9"
+          />
+        </div>
+      </div>
+
+      <div class="mt-5 d-flex justify-content-center">
+        <button class="btn btn-danger m-2 w-25" id="reset">Reset</button>
+        <button class="btn btn-primary m-2 w-25" id="regenerate">
+          Refresh
+        </button>
+        <button class="btn btn-primary m-2 w-25" id="empty">Empty</button>
+        <button class="btn btn-primary m-2 w-25" id="solve">Solve</button>
+      </div>
+    </div>
+  </body>
+  <!-- Bootstrap CDN -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- FontAwesome CDN -->
+  <script
+    src="https://kit.fontawesome.com/f187a22733.js"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Custom JS -->
+  <script src="./assets/js/script.js"></script>
+</html>
